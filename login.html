@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in · Tasklane</title>
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <button class="icon-btn auth-shell__theme" type="button" data-theme-toggle aria-label="Switch theme">
+      <span class="icon-moon">☾</span><span class="icon-sun">☀</span>
+    </button>
+
+    <section class="card auth-card">
+      <div class="auth-card__brand">
+        <h1>Welcome back</h1>
+        <p class="field__hint">Log in to see your tasks.</p>
+      </div>
+
+      <form class="form" action="login" method="post">
+        <div class="field">
+          <label for="email">Email</label>
+          <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input class="input" id="password" name="password" type="password" autocomplete="current-password" required>
+            <button class="password-wrap__toggle" type="button" data-password-toggle="password">Show</button>
+          </div>
+        </div>
+        <button class="btn btn--block" type="submit">Log in</button>
+      </form>
+
+      <p class="auth-card__alt">New here? <a href="register.html">Create an account</a></p>
+    </section>
+  </main>
+
+  <script src="js/password.js"></script>
+</body>
+</html>
