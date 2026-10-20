@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profile · Tasklane</title>
-  <script src="js/theme.js"></script>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/themes.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <title>{{ .title }}</title>
+  <script src="/static/js/theme.js"></script>
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/themes.css">
+  <link rel="stylesheet" href="/static/css/layout.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/pages.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="brand" href="index.html">Tasklane</a>
+      <a class="brand" href="{{ .Urls.Home }}">Tasklane</a>
       <div class="site-header__menu" id="main-nav">
         <nav class="main-nav" aria-label="Main">
-          <a href="index.html">Tasks</a>
-          <a href="manage.html">Manage</a>
-          <a href="profile.html" aria-current="page">Profile</a>
+          <a href="{{ .Urls.Home }}"{{ if eq .Path .Urls.Home }} aria-current="page"{{ end }}>Tasks</a>
+          <a href="{{ .Urls.Manage }}"{{ if eq .Path .Urls.Manage }} aria-current="page"{{ end }}>Manage</a>
+          <a href="{{ .Urls.Profile }}"{{ if eq .Path .Urls.Profile }} aria-current="page"{{ end }}>Profile</a>
         </nav>
         <div class="header-actions">
           <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">
@@ -93,6 +93,6 @@
     </section>
   </main>
 
-  <script src="js/nav.js"></script>
+  <script src="/static/js/nav.js"></script>
 </body>
 </html>
