@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Log in · Tasklane</title>
-  <script src="js/theme.js"></script>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/themes.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <script src="{% static 'js/theme.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+  <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+  <link rel="stylesheet" href="{% static 'css/pages.css' %}">
 </head>
 <body>
   <main class="auth-shell">
@@ -21,9 +22,16 @@
       <div class="auth-card__brand">
         <h1>Welcome back</h1>
         <p class="field__hint">Log in to see your tasks.</p>
+
+       {% if messages %}
+          {% for message in messages %}
+            <p class="field__hint" style="color: red;font-size: 15px;margin-top: 10px;">{{ message }}</p>
+          {% endfor %}
+      {% endif %}
       </div>
 
-      <form class="form" action="login" method="post">
+      <form class="form"  method="post">
+        {% csrf_token %}
         <div class="field">
           <label for="email">Email</label>
           <input class="input" id="email" name="email" type="email" autocomplete="email" required>
@@ -38,10 +46,10 @@
         <button class="btn btn--block" type="submit">Log in</button>
       </form>
 
-      <p class="auth-card__alt">New here? <a href="register.html">Create an account</a></p>
+      <p class="auth-card__alt">New here? <a href="{% url 'accounts_app:register_page' %}">Create an account</a></p>
     </section>
   </main>
 
-  <script src="js/password.js"></script>
+  <script src="{% static 'js/password.js' %}"></script>
 </body>
 </html>

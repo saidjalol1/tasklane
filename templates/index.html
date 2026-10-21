@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="page-head">
+      <div>
+        <h1>My tasks</h1>
+        <p>3 open, 1 done</p>
+      </div>
+      <a class="btn" href="manage.html">Add task</a>
+    </div>
+
+    <!-- Filters: a plain GET form. The server reads ?q=&status=&priority= -->
+    <form class="card filter-form" action="index.html" method="get">
+      <div class="field field--search">
+        <label for="q">Search</label>
+        <input class="input" id="q" name="q" type="search" placeholder="Search by title">
+      </div>
+      <div class="field">
+        <label for="status">Status</label>
+        <select class="select" id="status" name="status">
+          <option value="">All</option>
+          <option value="open">Open</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="priority">Priority</label>
+        <select class="select" id="priority" name="priority">
+          <option value="">Any</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button class="btn" type="submit">Apply</button>
+        <a class="btn btn--ghost" href="index.html">Reset</a>
+      </div>
+    </form>
+
+    <ul class="task-list">
+
+      {% for i in tasks %}
+      <li class="task">
+        <form action="tasks/1/toggle" method="post">
+          <button class="check" type="submit" aria-label="Mark “Prepare lesson 12 slides” as done"></button>
+        </form>
+        <div class="task__body">
+          <h2 class="task__title">{{ i.title }}</h2>
+          <p class="task__desc">{{ i.description }}</p>
+          <div class="task__meta">
+            <span class="badge badge--{{ i.priority }}">{{ i.priority }}</span>
+            <span>{{ i.due_date }}</span>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+
+      <li class="task task--done">
+        <form action="tasks/4/toggle" method="post">
+          <button class="check check--on" type="submit" aria-label="Mark “Back up database” as open"></button>
+        </form>
+        <div class="task__body">
+          <h2 class="task__title">Back up database</h2>
+          <div class="task__meta">
+            <span class="badge badge--medium">Medium</span>
+            <span>Done Oct 18</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+{% endblock content %}
+
+  
