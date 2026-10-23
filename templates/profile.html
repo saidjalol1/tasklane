@@ -1,73 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profile · Tasklane</title>
-  <script src="js/theme.js"></script>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/themes.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a class="brand" href="index.html">Tasklane</a>
-      <div class="site-header__menu" id="main-nav">
-        <nav class="main-nav" aria-label="Main">
-          <a href="index.html">Tasks</a>
-          <a href="manage.html">Manage</a>
-          <a href="profile.html" aria-current="page">Profile</a>
-        </nav>
-        <div class="header-actions">
-          <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">
-            <span class="icon-moon">☾</span><span class="icon-sun">☀</span>
-          </button>
-          <form action="logout" method="post">
-            <button class="btn btn--ghost btn--sm" type="submit">Log out</button>
-          </form>
-        </div>
-      </div>
-      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">☰</button>
-    </div>
-  </header>
+{% extends 'base.html' %}
 
-  <main class="container page">
+
+
+{% block content %}
     <div class="profile-head">
       <div class="avatar" aria-hidden="true">AK</div>
       <div>
         <h1>Profile</h1>
         <p>Update your details and password.</p>
+        {% if messages %}
+          {% for message in messages %}
+            <p class="field__hint" style="color: greenyellow;font-size: 15px;margin-top: 10px;">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
     <div class="grid-2">
       <section class="card" aria-labelledby="details-title">
         <h2 id="details-title">Your details</h2>
-        <form class="form" action="profile/update" method="post">
+        <form class="form"  method="post">
+          {% csrf_token %}
           <div class="field">
             <label for="full-name">Full name</label>
-            <input class="input" id="full-name" name="full_name" type="text" value="Alisher Karimov" required>
+            <input class="input" id="full-name" name="full_name" type="text" value="{{ user.first_name }} {{ user.last_name }}">
           </div>
           <div class="field">
             <label for="email">Email</label>
-            <input class="input" id="email" name="email" type="email" value="alisher@example.com" required>
-          </div>
-          <div class="field">
-            <label for="bio">About you</label>
-            <textarea class="textarea" id="bio" name="bio"></textarea>
+            <input class="input" id="email" name="email" type="email" value="{{ user.username }}" required>
           </div>
           <div class="form-actions">
-            <button class="btn" type="submit">Save changes</button>
+            <button class="btn" type="submit" name="detail_update">Save changes</button>
           </div>
         </form>
       </section>
 
       <section class="card" aria-labelledby="password-title">
         <h2 id="password-title">Change password</h2>
-        <form class="form" action="profile/password" method="post">
+        <form class="form" method="post">
+            {% csrf_token %}
           <div class="field">
             <label for="current-password">Current password</label>
             <input class="input" id="current-password" name="current_password" type="password" autocomplete="current-password" required>
@@ -78,7 +49,7 @@
             <p class="field__hint">Use at least 8 characters.</p>
           </div>
           <div class="form-actions">
-            <button class="btn" type="submit">Update password</button>
+            <button class="btn" type="submit" name="reset_password">Update password</button>
           </div>
         </form>
       </section>
@@ -91,8 +62,4 @@
         <button class="btn btn--danger" type="submit">Delete my account</button>
       </form>
     </section>
-  </main>
-
-  <script src="js/nav.js"></script>
-</body>
-</html>
+ {% endblock content %}

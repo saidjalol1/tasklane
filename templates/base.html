@@ -20,7 +20,7 @@
         <nav class="main-nav" aria-label="Main">
           <a href="{% url 'tasks:home' %}" {% if request.path == '/' %} aria-current="page" {% endif %}>Tasks</a>
           <a href="{% url 'tasks:manage' %}" {% if request.path == '/manage/' %} aria-current="page" {% endif %} >Manage</a>
-          <a href="profile.html" {% if request.path == '/profile/' %} aria-current="page" {% endif %}>Profile</a>
+          <a href="{% url 'tasks:profile' %}" {% if request.path == '/profile/' %} aria-current="page" {% endif %}>Profile</a>
         </nav>
         <div class="header-actions">
           <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">

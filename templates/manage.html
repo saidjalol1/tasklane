@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="form-actions">
-          <button class="btn" type="submit">Create task</button>
+          <button class="btn" type="submit" name="create_task">Create task</button>
         </div>
       </form>
     </section>
@@ -60,7 +60,9 @@
               <span class="btn btn--ghost btn--sm">Edit</span>
             </summary>
             <div class="manage-item__edit">
-              <form class="form" action="tasks/1/update" method="post">
+              <form class="form" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="task_id" value="{{ task.id}}">
                 <div class="field">
                   <label for="t1-title">Title</label>
                   <input class="input" id="t1-title" name="title" type="text" value="{{ task.title }}" required>
@@ -85,11 +87,13 @@
                   </div>
                 </div>
                 <div class="form-actions">
-                  <button class="btn" type="submit">Save changes</button>
+                  <button class="btn" type="submit" name="edit">Save changes</button>
                 </div>
               </form>
-              <form action="tasks/1/delete" method="post" style="margin-top: var(--space-3)">
-                <button class="btn btn--danger btn--sm" type="submit">Delete task</button>
+              <form  method="post" style="margin-top: var(--space-3)">
+                {% csrf_token %}
+                <input type="hidden" name="task_id" value="{{ task.id }}">
+                <button class="btn btn--danger btn--sm" type="submit" name="delete_task">Delete task</button>
               </form>
             </div>
           </details>
